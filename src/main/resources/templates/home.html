@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>売在分析</title>
+    <link th:href="@{/home.css}" rel="stylesheet">
+</head>
+
+<body>
+    <h2>売在分析</h2>
+
+    <div class="task_form">
+    <p>店舗の売在データをアップロードしてください</p>
+        <form method="post" action="/list" enctype="multipart/form-data">
+            <!-- ↑に入れるやつ enctype="multipart/form-data"-->
+            <!--部門 : <select name = "group" size="1">
+            <option value="11部門">11</option>
+            <option value="12部門">12</option>
+            <option value="13部門">13</option>
+            <option value="14部門">14</option>
+            <option value="15部門">15</option>
+            <option value="16部門">16</option>
+            <option value="21部門">21</option>
+            <option value="22部門">22</option>
+            <option value="23部門">23</option>
+            <option value="24部門">24</option>
+            <option value="25部門">25</option>
+            <option value="26部門">26</option>
+            <option value="31部門">31</option>
+            <option value="32部門">32</option>
+            <option value="41部門">41</option>
+            <option value="42部門">42</option>
+            <option value="43部門">43</option></select><br> -->
+
+             ファイル ： <input name="UpLoadFile" type="file"/><br/><br/>
+            <input type="submit" value="分析" />
+
+        </form></div>
+
+    <div class="tasklist">
+        <h2>結果一覧</h2>
+        <table border="1" style="border-collapse::collapse;">
+            <thead>
+            <tr>
+                <th class="hidden">ID</th>
+                <th>全社順位</th>
+                <th>ブロック順位</th>
+                <th>自店順位</th>
+                <th>部門</th>
+                <th>品番</th>
+                <th>品名</th>
+                <th>当週売点</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="task : ${taskList}">
+                    <td class="hidden" th:text="${task.id}"></td>
+                    <td width="40px" th:text="${task.numRankCompany}"></td>
+                    <td width="40px" th:text="${task.numRankBlock}"></td>
+                    <td width="40px" th:text="${task.numRankStore}"></td>
+                    <td width="20px" th:text="${task.Group}"></td>
+                    <td width="100px" th:text="${task.itemNumber}"></td>
+                    <td width="80px" th:text="${task.itemName}"></td>
+                    <td th:text="${task.numSalesPoint}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </body>
+</html>
