@@ -58,6 +58,7 @@ public class BestSeller {
             if (numSalesPoint >= 5.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
                 //取得した文字列の表示
 
+
                 System.out.println("売れ筋アイテム");
                 System.out.println("全社順位 : " + numRankCompany);
                 System.out.println("ブロック順位 : " + numRankBlock);

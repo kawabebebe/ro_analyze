@@ -11,7 +11,7 @@
 
     <div class="task_form">
     <p>店舗の売在データをアップロードしてください</p>
-        <form method="post" action="/list" enctype="multipart/form-data">
+        <form method="post" action="/add" enctype="multipart/form-data">
             <!-- ↑に入れるやつ enctype="multipart/form-data"-->
             <!--部門 : <select name = "group" size="1">
             <option value="11部門">11</option>
@@ -33,7 +33,9 @@
             <option value="43部門">43</option></select><br> -->
 
              ファイル ： <input name="UpLoadFile" type="file"/><br/><br/>
-            <input type="submit" value="分析" />
+            <input type="submit" value="売れ筋" name="bestSeller"/><br/><br/>
+            <input type="submit" value="売れ筋候補" name="chanceUp"/><br/><br/>
+            <input type="submit" value="店舗特性" name="darkHouse"/><br/><br/>
 
         </form></div>
 
