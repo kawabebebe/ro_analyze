@@ -54,18 +54,20 @@ public class HomeController {
             //24番目のセル（当週売点）
             Cell salesPoint = row.getCell(23);
 
-            String id = UUID.randomUUID().toString().substring(0, 8);
-            TaskItem item = new TaskItem(id, rankCompany, rankBlock, rankStore,
-                    Group, itemNumber, itemName, salesPoint);
-            taskItems.add(item);
+            double numRankCompany = Double.parseDouble(String.valueOf(rankCompany));
+            double numRankStore = Double.parseDouble(String.valueOf(rankStore));
+            double numSalesPoint = Double.parseDouble(String.valueOf(salesPoint));
 
 
-
+            if (numSalesPoint >= 5.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
+                String id = UUID.randomUUID().toString().substring(0, 8);
+                TaskItem item = new TaskItem(id, rankCompany, rankBlock, rankStore,
+                        Group, itemNumber, itemName, salesPoint);
+                taskItems.add(item);
             }
+        }
         return "redirect:/list";
     }
-
-
    /* String addItem( @RequestParam("UpLoadFile") MultipartFile multipartFile ,
                    @RequestParam("rankCompany") String numRankCompany,
                    @RequestParam("numRankBlock") String numRankBlock,

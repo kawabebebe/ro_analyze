@@ -40,7 +40,7 @@
         </form></div>
 
     <div class="tasklist">
-        <h2>結果一覧</h2>
+        <h2>売れ筋アイテム一覧</h2>
         <table border="1" style="border-collapse::collapse;">
             <thead>
             <tr>
@@ -57,13 +57,13 @@
             <tbody>
                 <tr th:each="task : ${taskList}">
                     <!--<td class="hidden" th:text="${task.id}"></td>-->
-                    <td width="100px" th:text="${task.rankCompany}"></td>
-                    <td width="100px" th:text="${task.rankBlock}"></td>
-                    <td width="100px" th:text="${task.rankStore}"></td>
-                    <td width="100px" th:text="${task.Group}"></td>
-                    <td width="100px" th:text="${task.itemNumber}"></td>
-                    <td width="100px" th:text="${task.itemName}"></td>
-                    <td th:text="${task.salesPoint}"></td>
+                    <td width="90px" th:text="${task.rankCompany}"></td>
+                    <td width="90px" th:text="${task.rankBlock}"></td>
+                    <td width="90px" th:text="${task.rankStore}"></td>
+                    <td width="90px" th:text="${task.Group}"></td>
+                    <td width="150px" th:text="${task.itemNumber}"></td>
+                    <td width="250px" th:text="${task.itemName}"></td>
+                    <td width="150px" th:text="${task.salesPoint}"></td>
                 </tr>
             </tbody>
         </table>
