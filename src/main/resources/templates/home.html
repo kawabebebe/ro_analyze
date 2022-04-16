@@ -33,9 +33,9 @@
             <option value="43部門">43</option></select><br> -->
 
              ファイル ： <input name="UpLoadFile" type="file"/><br/><br/>
-            <input type="submit" value="売れ筋" name="bestSeller"/><br/><br/>
-            <input type="submit" value="売れ筋候補" name="chanceUp"/><br/><br/>
-            <input type="submit" value="店舗特性" name="darkHouse"/><br/><br/>
+            <input type="submit" value="分析"/><br/><br/>
+          <!--  <input type="submit" value="売れ筋候補" name="chanceUp"/><br/><br/>
+            <input type="submit" value="店舗特性" name="darkHouse"/><br/><br/>   -->
 
         </form></div>
 
@@ -44,7 +44,7 @@
         <table border="1" style="border-collapse::collapse;">
             <thead>
             <tr>
-                <th class="hidden">ID</th>
+                <!--<th class="hidden">ID</th>-->
                 <th>全社順位</th>
                 <th>ブロック順位</th>
                 <th>自店順位</th>
@@ -56,14 +56,14 @@
             </thead>
             <tbody>
                 <tr th:each="task : ${taskList}">
-                    <td class="hidden" th:text="${task.id}"></td>
-                    <td width="40px" th:text="${task.numRankCompany}"></td>
-                    <td width="40px" th:text="${task.numRankBlock}"></td>
-                    <td width="40px" th:text="${task.numRankStore}"></td>
-                    <td width="20px" th:text="${task.Group}"></td>
+                    <!--<td class="hidden" th:text="${task.id}"></td>-->
+                    <td width="100px" th:text="${task.rankCompany}"></td>
+                    <td width="100px" th:text="${task.rankBlock}"></td>
+                    <td width="100px" th:text="${task.rankStore}"></td>
+                    <td width="100px" th:text="${task.Group}"></td>
                     <td width="100px" th:text="${task.itemNumber}"></td>
-                    <td width="80px" th:text="${task.itemName}"></td>
-                    <td th:text="${task.numSalesPoint}"></td>
+                    <td width="100px" th:text="${task.itemName}"></td>
+                    <td th:text="${task.salesPoint}"></td>
                 </tr>
             </tbody>
         </table>
