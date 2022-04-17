@@ -18,15 +18,21 @@ import java.util.UUID;
 //プロJavaではHomeコントローラーの（”/hello")
 @Controller
 public class HomeController {
-    record TaskItem(String id, Cell rankCompany, Cell rankBlock, Cell rankStore, Cell Group,
+    record TaskItem(Cell rankCompany, Cell rankBlock, Cell rankStore, Cell Group,
                     Cell itemNumber, Cell itemName, Cell salesPoint){}
-    private List<TaskItem> taskItems = new ArrayList<>();
+    public List<TaskItem> taskItems1 = new ArrayList<>();
+    public List<TaskItem> taskItems2 = new ArrayList<>();
+    public List<TaskItem> taskItems3 = new ArrayList<>();
+
 
     @RequestMapping("/list")
     String listItems(Model model) {
-                model.addAttribute("taskList", taskItems);
+                model.addAttribute("taskList1", taskItems1);
+                model.addAttribute("taskList2", taskItems2);
+                model.addAttribute("taskList3", taskItems3);
                 return "home";
     }
+
 
     @PostMapping("/add")
     public String bestSeller(@RequestParam("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
@@ -57,15 +63,26 @@ public class HomeController {
             double numRankCompany = Double.parseDouble(String.valueOf(rankCompany));
             double numRankStore = Double.parseDouble(String.valueOf(rankStore));
             double numSalesPoint = Double.parseDouble(String.valueOf(salesPoint));
+            double numRankBlock = Double.parseDouble(String.valueOf(rankBlock));
 
-
+            //売れ筋条件
             if (numSalesPoint >= 5.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
-                String id = UUID.randomUUID().toString().substring(0, 8);
-                TaskItem item = new TaskItem(id, rankCompany, rankBlock, rankStore,
+                TaskItem item1 = new TaskItem(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint);
-                taskItems.add(item);
+                taskItems1.add(item1);
             }
-        }
+            //売れ筋候補条件
+            if (numRankCompany <= 3.0 && numRankBlock <= 3.0 && numRankStore >= 10.0) {
+                TaskItem item2 = new TaskItem(rankCompany, rankBlock, rankStore,
+                        Group, itemNumber, itemName, salesPoint);
+                taskItems2.add(item2);
+            }
+            //店舗特性条件
+            if (numRankBlock <= 3.0 && numRankCompany >= 6.0 && numRankStore <= 3.0) {
+                TaskItem item3 = new TaskItem(rankCompany, rankBlock, rankStore,
+                        Group, itemNumber, itemName, salesPoint);
+                taskItems3.add(item3);
+        }}
         return "redirect:/list";
     }
    /* String addItem( @RequestParam("UpLoadFile") MultipartFile multipartFile ,

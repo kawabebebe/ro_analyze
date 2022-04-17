@@ -39,7 +39,7 @@
 
         </form></div>
     <h2>結果一覧</h2>
-    <div class="tasklist">
+    <div class="tasklist1">
         <h3>売れ筋(全社順位3位以上,自店順位3位以上,当週売点5点以上)</h3>
         <table border="1" style="border-collapse::collapse;">
             <thead>
@@ -55,7 +55,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="task : ${taskList}">
+                <tr th:each="task : ${taskList1}">
                     <!--<td class="hidden" th:text="${task.id}"></td>-->
                     <td width="90px" th:text="${task.rankCompany}"></td>
                     <td width="90px" th:text="${task.rankBlock}"></td>
@@ -65,6 +65,67 @@
                     <td width="250px" th:text="${task.itemName}"></td>
                     <td width="150px" th:text="${task.salesPoint}"></td>
                 </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="tasklist2">
+        <h3>売れ筋候補(全社順位3位以上,ブロック順位3位以上,自店順位10位以下)</h3>
+        <table border="1" style="border-collapse::collapse;">
+            <thead>
+            <tr>
+                <!--<th class="hidden">ID</th>-->
+                <th>全社順位</th>
+                <th>ブロック順位</th>
+                <th>自店順位</th>
+                <th>部門</th>
+                <th>品番</th>
+                <th>品名</th>
+                <th>当週売点</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task : ${taskList2}">
+                <!--<td class="hidden" th:text="${task.id}"></td>-->
+                <td width="90px" th:text="${task.rankCompany}"></td>
+                <td width="90px" th:text="${task.rankBlock}"></td>
+                <td width="90px" th:text="${task.rankStore}"></td>
+                <td width="90px" th:text="${task.Group}"></td>
+                <td width="150px" th:text="${task.itemNumber}"></td>
+                <td width="250px" th:text="${task.itemName}"></td>
+                <td width="150px" th:text="${task.salesPoint}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tasklist3">
+        <h3>店舗特性(ブロック順位3位以上,全社順位10位以下,自店順位3位以上)</h3>
+        <table border="1" style="border-collapse::collapse;">
+            <thead>
+            <tr>
+                <!--<th class="hidden">ID</th>-->
+                <th>全社順位</th>
+                <th>ブロック順位</th>
+                <th>自店順位</th>
+                <th>部門</th>
+                <th>品番</th>
+                <th>品名</th>
+                <th>当週売点</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task : ${taskList3}">
+                <!--<td class="hidden" th:text="${task.id}"></td>-->
+                <td width="90px" th:text="${task.rankCompany}"></td>
+                <td width="90px" th:text="${task.rankBlock}"></td>
+                <td width="90px" th:text="${task.rankStore}"></td>
+                <td width="90px" th:text="${task.Group}"></td>
+                <td width="150px" th:text="${task.itemNumber}"></td>
+                <td width="250px" th:text="${task.itemName}"></td>
+                <td width="150px" th:text="${task.salesPoint}"></td>
+            </tr>
             </tbody>
         </table>
     </div>
