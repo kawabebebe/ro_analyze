@@ -35,9 +35,9 @@ public class HomeController {
 
 
     @PostMapping("/add")
-    public String bestSeller(@RequestParam("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
+    public String analyze(@RequestParam("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
         //エクセルファイルへアクセス
-        Workbook excel = WorkbookFactory.create(new File("C://tenpo_hinban_jisseki_1319_202230.xlsx"));
+        Workbook excel = WorkbookFactory.create(new File("C://tenpo_hinban_jisseki_1319_202233.xlsx"));
         // エクセルシート名
         Sheet sheet = excel.getSheet("店別");
 
@@ -65,20 +65,20 @@ public class HomeController {
             double numSalesPoint = Double.parseDouble(String.valueOf(salesPoint));
             double numRankBlock = Double.parseDouble(String.valueOf(rankBlock));
 
-            //売れ筋条件
+            //売れ筋条件 全社順位3位以上かつ自店順位3位以上かつ当週売点5点以上
             if (numSalesPoint >= 5.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
                 TaskItem item1 = new TaskItem(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint);
                 taskItems1.add(item1);
             }
-            //売れ筋候補条件
+            //売れ筋候補条件 全社順位3位以上かつブロック順位3位以上かつ自店順位10位以下
             if (numRankCompany <= 3.0 && numRankBlock <= 3.0 && numRankStore >= 10.0) {
                 TaskItem item2 = new TaskItem(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint);
                 taskItems2.add(item2);
             }
-            //店舗特性条件
-            if (numRankBlock <= 3.0 && numRankCompany >= 6.0 && numRankStore <= 3.0) {
+            //店舗特性条件 全社順位10位以下かつブロック順位10位以下かつ当週売れ点3点以上かつ自店順位3位以上
+            if (numRankCompany >= 10.0 && numRankBlock >= 10.0 && numSalesPoint >= 3.0 && numRankStore <= 3.0) {
                 TaskItem item3 = new TaskItem(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint);
                 taskItems3.add(item3);

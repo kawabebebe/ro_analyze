@@ -1,0 +1,23 @@
+    body {
+        margin: 30px;
+        color: #283655;
+    }
+    input {
+        border: 1px solid;
+        margin-left: 10px;
+    }
+    /*エクセル入力フォーム*/
+    .task_form {
+        padding: 0px 10px 10px 10px;
+        border: 1px solid #4D648D;
+    }
+    input btn {
+        margin 10px 20px;
+    }
+
+    /*結果一覧*/
+    .tasklist table {
+        width: 100%;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
