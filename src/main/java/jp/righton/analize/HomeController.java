@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
 import java.io.IOException;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,15 @@ public class HomeController {
 
 
     @PostMapping("/add")
-    public String analyze(@RequestParam("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
-        //エクセルファイルへアクセス
-        Workbook excel = WorkbookFactory.create(new File("C://tenpo_hinban_jisseki_1319_202233.xlsx"));
+    public String analyze(@RequestPart("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
+        //Cドライブ直下にファイルを保存
+
+        //Cドライブ直下のパス取得
+        Path savePath = Paths.get("C:/");
+        //ファイル名取得
+        String fileName = UpLoadFile.getOriginalFilename();
+        //エクセルファイルへアクセス(Cドライブ直下のパス名+ファイル名)
+        Workbook excel = WorkbookFactory.create(new File(savePath + fileName ));
         // エクセルシート名
         Sheet sheet = excel.getSheet("店別");
 
