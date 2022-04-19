@@ -1,6 +1,7 @@
 package jp.righton.analize;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
@@ -39,12 +41,19 @@ public class HomeController {
 
     @PostMapping("/add")
     public String analyze(@RequestPart("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
-        //Cドライブ直下にファイルを保存
+        //Cドライブ直下にファイルを移動　だいたいダウンロードしたらデスクトップに置くから
+        //移動したいFileオブジェクト
+        //File sample1 = new File("C://Users//yoshi//Desktop" + fileName);
+        //移動先のFileオブジェクト"C:\Users\yoshi\Desktop\tenpo_hinban_jisseki_1319_202230.xlsx"
+        //File sample2 = new File(String.valueOf(savePath));
+        //sample1.renameTo(sample2);
+        //上の6行は今後実装。これができるまではCドライブ直下にファイルを保存することで対応。
 
-        //Cドライブ直下のパス取得
-        Path savePath = Paths.get("C:/");
+
         //ファイル名取得
         String fileName = UpLoadFile.getOriginalFilename();
+        //Cドライブ直下のパス取得
+        Path savePath = Paths.get("C:/");
         //エクセルファイルへアクセス(Cドライブ直下のパス名+ファイル名)
         Workbook excel = WorkbookFactory.create(new File(savePath + fileName ));
         // エクセルシート名
