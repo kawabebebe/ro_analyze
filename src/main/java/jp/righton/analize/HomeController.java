@@ -42,7 +42,7 @@ public class HomeController {
     public String analyze(@RequestPart("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
         //ファイル名取得
         String fileName = UpLoadFile.getOriginalFilename();
-        //デスクトップのパス取得　　全社システムにするならデスクトップパスを店舗PCに合うものに変更
+        //デスクトップのパス取得　　全社システムにするならデスクトップパスを店舗PCに合うものに変更⇒[D:\\店舗用\\Desktop\\]になる？
         Path savePath = Paths.get("C:\\Users\\yoshi\\Desktop");
         //エクセルファイルへアクセス⇒デスクトップのパス+ファイル名　※" / " これ漏れたらNotFileFoundで返ってくる！
         Workbook excel = WorkbookFactory.create(new File(savePath + "/" + fileName ));
