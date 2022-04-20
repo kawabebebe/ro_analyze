@@ -45,7 +45,7 @@ public class HomeController {
         //デスクトップのパス取得　　全社システムにするならデスクトップパスを店舗PCに合うものに変更
         Path savePath = Paths.get("C:\\Users\\yoshi\\Desktop");
         //エクセルファイルへアクセス⇒デスクトップのパス+ファイル名　※" / " これ漏れたらNotFileFoundで返ってくる！
-        Workbook excel = WorkbookFactory.create(new File(savePath +"/"+ fileName ));
+        Workbook excel = WorkbookFactory.create(new File(savePath + "/" + fileName ));
         // エクセルシート名
         Sheet sheet = excel.getSheet("店別");
         for (int i = 5; i <= sheet.getLastRowNum(); i++) {
