@@ -1,29 +1,28 @@
 package jp.righton.analize;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
-import org.springframework.http.codec.multipart.Part;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-
-import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
+import org.springframework.http.codec.multipart.Part;
+import org.springframework.web.bind.annotation.GetMapping;
 
-//プロJavaではHomeコントローラーの（”/hello")
 @Controller
 public class HomeController {
-    //全社順位、ブロック順位、自店順位、部門、品番、品名、当週売点、店舗在庫
+    //　　　　　　　　　　　　　　全社順位、　　　ブロック順位、　　　　自店順位、　　　部門、　
     record TaskItem(Cell rankCompany, Cell rankBlock, Cell rankStore, Cell Group,
+                  //            品番、          品名、        当週売点、    店舗在庫
                     Cell itemNumber, Cell itemName, Cell salesPoint, Cell stock){}
     public List<TaskItem> taskItems1 = new ArrayList<>();
     public List<TaskItem> taskItems2 = new ArrayList<>();
@@ -41,20 +40,21 @@ public class HomeController {
 
     @PostMapping("/add")
     public String analyze(@RequestPart("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
+        //ファイル名取得
+        String fileName = UpLoadFile.getOriginalFilename();
         //Cドライブ直下にファイルを移動　だいたいダウンロードしたらデスクトップに置くから
         //移動したいFileオブジェクト
-        //File sample1 = new File("C://Users//yoshi//Desktop" + fileName);
-        //移動先のFileオブジェクト"C:\Users\yoshi\Desktop\tenpo_hinban_jisseki_1319_202230.xlsx"
-        //File sample2 = new File(String.valueOf(savePath));
-        //sample1.renameTo(sample2);
+        Path sample1 = Paths.get("C:\\Users\\yoshi\\Desktop\\" + fileName);
+        //Cドライブ直下のパス取得
+        Path savePath = Paths.get("C:/");
+        //移動先のFileオブジェクト"C:\Users\yoshi\Desktop\tenpo_hinban_jisseki_1319_202233.xlsx"
+        Path sample2 = Paths.get(String.valueOf(savePath + fileName));
+        Files.copy(sample1, sample2);
         //上の6行は今後実装。これができるまではCドライブ直下にファイルを保存することで対応。
 
 
 
-        //ファイル名取得
-        String fileName = UpLoadFile.getOriginalFilename();
-        //Cドライブ直下のパス取得
-        Path savePath = Paths.get("C:/");
+
         //エクセルファイルへアクセス(Cドライブ直下のパス名+ファイル名)
         Workbook excel = WorkbookFactory.create(new File(savePath + fileName ));
         // エクセルシート名
@@ -103,40 +103,8 @@ public class HomeController {
                 TaskItem item3 = new TaskItem(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems3.add(item3);
-        }}
-        return "redirect:/list";
+            }
+        }return "redirect:/list";
     }
-   /* String addItem( @RequestParam("UpLoadFile") MultipartFile multipartFile ,
-                   @RequestParam("rankCompany") String numRankCompany,
-                   @RequestParam("numRankBlock") String numRankBlock,
-                   @RequestParam("numRankStore") String numRankStore,
-                   @RequestParam("Group") String Group,
-                   @RequestParam("itemNumber") String itemNumber,
-                   @RequestParam("itemName") String itemName,
-                   @RequestParam("numSalesPoint") double numSalesPoint){
-        String id = UUID.randomUUID().toString().substring(0, 8);
-        TaskItem item = new TaskItem(id, numRankCompany, numRankBlock, numRankStore,
-                Group, itemNumber, itemName, numSalesPoint);
-        taskItems.add(item);*/
-
-
-/*
-    @RequestMapping("/list")
-    String ListItems(){
-        String result = analyzeInfo.stream()
-               .map(AnalyzeInfo::toString)
-                .collect(Collectors.joining(", "));
-       return result;
-    }
-*/
-
-
-    @RequestMapping(value="/hello")
-    String hello(Model model) {
-        model.addAttribute("time",LocalDateTime.now());
-        return "hello";
-    }
-
-
 }
 
