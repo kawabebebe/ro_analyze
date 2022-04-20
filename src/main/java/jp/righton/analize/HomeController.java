@@ -42,25 +42,12 @@ public class HomeController {
     public String analyze(@RequestPart("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
         //ファイル名取得
         String fileName = UpLoadFile.getOriginalFilename();
-        //Cドライブ直下にファイルを移動　だいたいダウンロードしたらデスクトップに置くから
-        //移動したいFileオブジェクト
-        Path sample1 = Paths.get("C:\\Users\\yoshi\\Desktop\\" + fileName);
-        //Cドライブ直下のパス取得
-        Path savePath = Paths.get("C:/");
-        //移動先のFileオブジェクト"C:\Users\yoshi\Desktop\tenpo_hinban_jisseki_1319_202233.xlsx"
-        Path sample2 = Paths.get(String.valueOf(savePath + fileName));
-        Files.copy(sample1, sample2);
-        //上の6行は今後実装。これができるまではCドライブ直下にファイルを保存することで対応。
-
-
-
-
-        //エクセルファイルへアクセス(Cドライブ直下のパス名+ファイル名)
-        Workbook excel = WorkbookFactory.create(new File(savePath + fileName ));
+        //デスクトップのパス取得　　全社システムにするならデスクトップパスを店舗PCに合うものに変更
+        Path savePath = Paths.get("C:\\Users\\yoshi\\Desktop");
+        //エクセルファイルへアクセス⇒デスクトップのパス+ファイル名　※" / " これ漏れたらNotFileFoundで返ってくる！
+        Workbook excel = WorkbookFactory.create(new File(savePath +"/"+ fileName ));
         // エクセルシート名
         Sheet sheet = excel.getSheet("店別");
-
-        //~~~~ここから~~~~//
         for (int i = 5; i <= sheet.getLastRowNum(); i++) {
             //6行目(セル順は５)以降が必要データ
             Row row = sheet.getRow(i);
