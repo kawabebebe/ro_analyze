@@ -12,35 +12,25 @@ import java.nio.file.Paths;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
-import java.util.UUID;
-import org.springframework.http.codec.multipart.Part;
-import org.springframework.web.bind.annotation.GetMapping;
-import java.nio.file.Files;
-
 @Controller
-public class HomeController {
+public class Home_AController {
     //　　　　　　　　　　　　　全社順位、　　　ブロック順位、　　　　自店順位、　　　部門、　
-    record TaskItem(Cell rankCompany, Cell rankBlock, Cell rankStore, Cell Group,
-    //                       品番、          品名、        当週売点、    店舗在庫
+    record TaskItem_A(Cell rankCompany, Cell rankBlock, Cell rankStore, Cell Group,
+                    //                       品番、          品名、        当週売点、    店舗在庫
                     Cell itemNumber, Cell itemName, Cell salesPoint, Cell stock){}
-    public List<TaskItem> taskItems1 = new ArrayList<>(); //売れ筋
-    public List<TaskItem> taskItems2 = new ArrayList<>(); //売れ筋候補
-    public List<TaskItem> taskItems3 = new ArrayList<>(); //店舗特性
+    public List<Home_AController.TaskItem_A> taskItems1 = new ArrayList<>(); //売れ筋
+    public List<Home_AController.TaskItem_A> taskItems2 = new ArrayList<>(); //売れ筋候補
+    public List<Home_AController.TaskItem_A> taskItems3 = new ArrayList<>(); //店舗特性
 
-    @RequestMapping("/list")
-    String listItems(Model model) {
-                model.addAttribute("taskList1", taskItems1); //売れ筋
-                model.addAttribute("taskList2", taskItems2); //売れ筋候補
-                model.addAttribute("taskList3", taskItems3); //店舗特性
-                return "home";
+    @RequestMapping("/list_A")
+    String listItems_A(Model model) {
+        model.addAttribute("taskList_A1", taskItems1); //売れ筋
+        model.addAttribute("taskList_A2", taskItems2); //売れ筋候補
+        model.addAttribute("taskList_A3", taskItems3); //店舗特性
+        return "home_A";
     }
-
-
-
-
-    @PostMapping("/add")
-    public String analyze(@RequestPart("UpLoadFile") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
+    @PostMapping("/add_A")
+    public String analyze(@RequestPart("UpLoadFile_A") MultipartFile UpLoadFile)throws EncryptedDocumentException, IOException {
         //ファイル名取得
         String fileName = UpLoadFile.getOriginalFilename();
         //デスクトップのパス取得　　全社システムにするならデスクトップパスを店舗PCに合うものに変更⇒[D:\\店舗用\\Desktop\\]
@@ -74,25 +64,24 @@ public class HomeController {
             double numSalesPoint = Double.parseDouble(String.valueOf(salesPoint));
             double numRankBlock = Double.parseDouble(String.valueOf(rankBlock));
 
-            //売れ筋条件 全社順位3位以上かつ自店順位3位以上かつ当週売点5点以上
-            if (numSalesPoint >= 5.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
-                TaskItem item1 = new TaskItem(rankCompany, rankBlock, rankStore,
+            //売れ筋条件 全社順位3位以上かつ自店順位3位以上かつ当週売点15点以上
+            if (numSalesPoint >= 15.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
+                Home_AController.TaskItem_A item1 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems1.add(item1);
             }
             //売れ筋候補条件 全社順位3位以上かつブロック順位3位以上かつ自店順位10位以下
             if (numRankCompany <= 3.0 && numRankBlock <= 3.0 && numRankStore >= 10.0) {
-                TaskItem item2 = new TaskItem(rankCompany, rankBlock, rankStore,
+                Home_AController.TaskItem_A item2 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems2.add(item2);
             }
-            //店舗特性条件 全社順位10位以下かつブロック順位10位以下かつ当週売れ点3点以上かつ自店順位3位以上
-            if (numRankCompany >= 10.0 && numRankBlock >= 10.0 && numSalesPoint >= 3.0 && numRankStore <= 3.0) {
-                TaskItem item3 = new TaskItem(rankCompany, rankBlock, rankStore,
+            //店舗特性条件 全社順位10位以下かつブロック順位10位以下かつ当週売れ点10点以上かつ自店順位3位以上
+            if (numRankCompany >= 10.0 && numRankBlock >= 10.0 && numSalesPoint >= 10.0 && numRankStore <= 3.0) {
+                Home_AController.TaskItem_A item3 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems3.add(item3);
             }
-        }return "redirect:/list";
+        }return "redirect:/list_A";
     }
 }
-

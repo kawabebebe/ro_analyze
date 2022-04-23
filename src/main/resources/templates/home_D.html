@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>売在分析</title>
+    <link th:href="@{/home.css}" rel="stylesheet">
+</head>
+
+<body>
+<h1>売在分析D</h1>
+
+<div class="task_form">
+    <p>店舗の売在データをアップロードしてください</p>
+    <form method="post" action="/add_D" enctype="multipart/form-data">
+
+        店格 : <select name = "store_group" size="1">
+        <option value="/list_D">D</option>
+        <option value="/list_B">B</option>
+        <option value="/list_A">A</option>
+        <option value="/list">C</option>
+        <option value="/list_E">E</option>
+    </select><br/><br/>
+
+        ファイル ： <input name="UpLoadFile_D" type="file" /><br/><br/>
+        <input class="btn" type="submit" value="分析"/><br/><br/>
+        <!--  <input type="submit" value="売れ筋候補" name="chanceUp"/><br/><br/>
+          <input type="submit" value="店舗特性" name="darkHouse"/><br/><br/>   -->
+
+    </form></div>
+<h2>結果一覧</h2>
+<div class="tasklist">
+    <h3>売れ筋(全社順位3位以上,自店順位3位以上,当週売点3点以上)</h3>
+    <table border="1" style="border-collapse::collapse;">
+        <thead>
+        <tr>
+            <!--<th class="hidden">ID</th>-->
+            <th>全社順位</th>
+            <th>ブロック順位</th>
+            <th>自店順位</th>
+            <th>部門</th>
+            <th>品番</th>
+            <th>品名</th>
+            <th>当週売点</th>
+            <th>店舗在庫</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${taskList_D1}">
+            <!--<td class="hidden" th:text="${task.id}"></td>-->
+            <td width="90px" th:text="${task.rankCompany}"></td>
+            <td width="90px" th:text="${task.rankBlock}"></td>
+            <td width="90px" th:text="${task.rankStore}"></td>
+            <td width="90px" th:text="${task.Group}"></td>
+            <td width="150px" th:text="${task.itemNumber}"></td>
+            <td width="230px" th:text="${task.itemName}"></td>
+            <td width="130px" th:text="${task.salesPoint}"></td>
+            <td width="150px" th:text="${task.stock}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="tasklist">
+    <h3>売れ筋候補(全社順位3位以上,ブロック順位3位以上,自店順位10位以下)</h3>
+    <table border="1" style="border-collapse::collapse;">
+        <thead>
+        <tr>
+            <!--<th class="hidden">ID</th>-->
+            <th>全社順位</th>
+            <th>ブロック順位</th>
+            <th>自店順位</th>
+            <th>部門</th>
+            <th>品番</th>
+            <th>品名</th>
+            <th>当週売点</th>
+            <th>店舗在庫</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${taskList_D2}">
+            <!--<td class="hidden" th:text="${task.id}"></td>-->
+            <td width="90px" th:text="${task.rankCompany}"></td>
+            <td width="90px" th:text="${task.rankBlock}"></td>
+            <td width="90px" th:text="${task.rankStore}"></td>
+            <td width="90px" th:text="${task.Group}"></td>
+            <td width="150px" th:text="${task.itemNumber}"></td>
+            <td width="230px" th:text="${task.itemName}"></td>
+            <td width="130px" th:text="${task.salesPoint}"></td>
+            <td width="150px" th:text="${task.stock}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="tasklist">
+    <h3>店舗特性(全社順位10位以下,ブロック順位10位以下,自店順位3位以上,当週売れ点3点以上)</h3>
+    <table border="1" style="border-collapse::collapse;">
+        <thead>
+        <tr>
+            <!--<th class="hidden">ID</th>-->
+            <th>全社順位</th>
+            <th>ブロック順位</th>
+            <th>自店順位</th>
+            <th>部門</th>
+            <th>品番</th>
+            <th>品名</th>
+            <th>当週売点</th>
+            <th>店舗在庫</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${taskList_D3}">
+            <!--<td class="hidden" th:text="${task.id}"></td>-->
+            <td width="90px" th:text="${task.rankCompany}"></td>
+            <td width="90px" th:text="${task.rankBlock}"></td>
+            <td width="90px" th:text="${task.rankStore}"></td>
+            <td width="90px" th:text="${task.Group}"></td>
+            <td width="150px" th:text="${task.itemNumber}"></td>
+            <td width="230px" th:text="${task.itemName}"></td>
+            <td width="130px" th:text="${task.salesPoint}"></td>
+            <td width="150px" th:text="${task.stock}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
