@@ -65,13 +65,13 @@ public class Home_EController {
             double numRankBlock = Double.parseDouble(String.valueOf(rankBlock));
 
             //売れ筋条件 全社順位3位以上かつ自店順位3位以上かつ当週売れ点1以上
-            if (numSalesPoint >= 1.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
+            if (numSalesPoint >= 1.0 && numRankCompany <= 3.0 && numRankStore <= 3.0) {
                 Home_EController.TaskItem_E item1 = new Home_EController.TaskItem_E(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems1.add(item1);
             }
             //売れ筋候補条件 全社順位3位以上かつブロック順位3位以上かつ自店順位10位以下
-            if (numRankCompany <= 3.0 && numRankBlock <= 3.0 && numRankStore >= 10.0) {
+            if (numRankCompany <= 5.0 && numRankBlock <= 5.0 && numRankStore >= 7.0) {
                 Home_EController.TaskItem_E item2 = new Home_EController.TaskItem_E(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems2.add(item2);

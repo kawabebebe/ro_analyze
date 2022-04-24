@@ -76,8 +76,8 @@ public class Home_BController {
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems2.add(item2);
             }
-            //店舗特性条件 全社順位10位以下かつブロック順位10位以下かつ当週売れ点8点以上かつ自店順位3位以上
-            if (numRankCompany >= 10.0 && numRankBlock >= 10.0 && numSalesPoint >= 8.0 && numRankStore <= 3.0) {
+            //店舗特性条件 全社順位10位以下かつブロック順位10位以下かつ当週売れ点7点以上かつ自店順位3位以上
+            if (numRankCompany >= 10.0 && numRankBlock >= 10.0 && numSalesPoint >= 7.0 && numRankStore <= 3.0) {
                 Home_BController.TaskItem_B item3 = new Home_BController.TaskItem_B(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock);
                 taskItems3.add(item3);

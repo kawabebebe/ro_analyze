@@ -23,8 +23,7 @@
 
              ファイル ： <input name="UpLoadFile" type="file" /><br/><br/>
             <input class="btn" type="submit" value="分析"/><br/><br/>
-          <!--  <input type="submit" value="売れ筋候補" name="chanceUp"/><br/><br/>
-            <input type="submit" value="店舗特性" name="darkHouse"/><br/><br/>   -->
+
 
         </form></div>
     <h2>結果一覧</h2>
@@ -42,6 +41,7 @@
                 <th>品名</th>
                 <th>当週売点</th>
                 <th>店舗在庫</th>
+                <th>商品画像</th>
             </tr>
             </thead>
             <tbody>
@@ -55,6 +55,7 @@
                     <td width="230px" th:text="${task.itemName}"></td>
                     <td width="130px" th:text="${task.salesPoint}"></td>
                     <td width="150px" th:text="${task.stock}"></td>
+                    <td width="150px"><a th:href="@{${task.itemLink}}">画像</a></td>
                 </tr>
             </tbody>
         </table>
@@ -74,6 +75,7 @@
                 <th>品名</th>
                 <th>当週売点</th>
                 <th>店舗在庫</th>
+                <th>商品画像</th>
             </tr>
             </thead>
             <tbody>
@@ -87,6 +89,7 @@
                 <td width="230px" th:text="${task.itemName}"></td>
                 <td width="130px" th:text="${task.salesPoint}"></td>
                 <td width="150px" th:text="${task.stock}"></td>
+                <td width="150px"><a th:href="@{${task.itemLink}}">画像</a></td>
             </tr>
             </tbody>
         </table>
@@ -106,6 +109,7 @@
                 <th>品名</th>
                 <th>当週売点</th>
                 <th>店舗在庫</th>
+                <th>商品画像</th>
             </tr>
             </thead>
             <tbody>
@@ -119,6 +123,7 @@
                 <td width="230px" th:text="${task.itemName}"></td>
                 <td width="130px" th:text="${task.salesPoint}"></td>
                 <td width="150px" th:text="${task.stock}"></td>
+                <td width="150px"><a th:href="@{${task.itemLink}}">画像</a></td>
             </tr>
             </tbody>
         </table>
