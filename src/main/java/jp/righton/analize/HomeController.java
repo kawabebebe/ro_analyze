@@ -75,7 +75,7 @@ public class HomeController {
 
             //売れ筋条件 全社順位3位以上かつ自店順位3位以上かつ当週売点5点以上
             if (salesPoint >= 5.0 && rankCompany <= 3 && rankStore <= 3.0) {
-
+                //画像リンク作成
                 String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
                 TaskItem item1 = new TaskItem(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock, itemLink);
@@ -83,7 +83,7 @@ public class HomeController {
             }
             //売れ筋候補条件 全社順位3位以上かつブロック順位3位以上かつ自店順位10位以下
             if (rankCompany <= 3.0 && rankBlock <= 3.0 && rankStore >= 10.0) {
-
+                //画像リンク作成
                 String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
 
                 TaskItem item2 = new TaskItem(rankCompany, rankBlock, rankStore,

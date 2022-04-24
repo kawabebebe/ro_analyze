@@ -67,6 +67,7 @@ public class Home_AController {
 
             //売れ筋条件 全社順位3位以上かつ自店順位3位以上かつ当週売点15点以上
             if (salesPoint >= 15.0 && rankCompany <= 3 && rankStore <= 3.0) {
+                //画像リンク作成
                 String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
                 Home_AController.TaskItem_A item1 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock, itemLink);
@@ -74,6 +75,7 @@ public class Home_AController {
             }
             //売れ筋候補条件 全社順位3位以上かつブロック順位3位以上かつ自店順位10位以下
             if (rankCompany <= 3.0 && rankBlock <= 3.0 && rankStore >= 10.0) {
+                //画像リンク作成
                 String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
                 Home_AController.TaskItem_A item2 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock, itemLink);
@@ -81,6 +83,7 @@ public class Home_AController {
             }
             //店舗特性条件 全社順位10位以下かつブロック順位10位以下かつ当週売れ点10点以上かつ自店順位3位以上
             if (rankCompany >= 10.0 && rankBlock >= 10.0 && salesPoint >= 10.0 && rankStore <= 3.0) {
+                //画像リンク作成
                 String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
                 Home_AController.TaskItem_A item3 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
                         Group, itemNumber, itemName, salesPoint, stock, itemLink);
