@@ -16,8 +16,8 @@ import java.util.List;
 public class Home_AController {
     //　　　　　　　　　　　　　全社順位、　　　ブロック順位、　　　　自店順位、　　　部門、　
     record TaskItem_A(Cell rankCompany, Cell rankBlock, Cell rankStore, Cell Group,
-                    //                       品番、          品名、        当週売点、    店舗在庫
-                    Cell itemNumber, Cell itemName, Cell salesPoint, Cell stock){}
+                    //       品番、          品名、        当週売点、    店舗在庫　　　　商品画像リンク
+                    Cell itemNumber, Cell itemName, Cell salesPoint, Cell stock, String itemLink){}
     public List<Home_AController.TaskItem_A> taskItems1 = new ArrayList<>(); //売れ筋
     public List<Home_AController.TaskItem_A> taskItems2 = new ArrayList<>(); //売れ筋候補
     public List<Home_AController.TaskItem_A> taskItems3 = new ArrayList<>(); //店舗特性
@@ -66,20 +66,23 @@ public class Home_AController {
 
             //売れ筋条件 全社順位3位以上かつ自店順位3位以上かつ当週売点15点以上
             if (numSalesPoint >= 15.0 && numRankCompany <= 3 && numRankStore <= 3.0) {
+                String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
                 Home_AController.TaskItem_A item1 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
-                        Group, itemNumber, itemName, salesPoint, stock);
+                        Group, itemNumber, itemName, salesPoint, stock, itemLink);
                 taskItems1.add(item1);
             }
             //売れ筋候補条件 全社順位3位以上かつブロック順位3位以上かつ自店順位10位以下
             if (numRankCompany <= 3.0 && numRankBlock <= 3.0 && numRankStore >= 10.0) {
+                String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
                 Home_AController.TaskItem_A item2 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
-                        Group, itemNumber, itemName, salesPoint, stock);
+                        Group, itemNumber, itemName, salesPoint, stock, itemLink);
                 taskItems2.add(item2);
             }
             //店舗特性条件 全社順位10位以下かつブロック順位10位以下かつ当週売れ点10点以上かつ自店順位3位以上
             if (numRankCompany >= 10.0 && numRankBlock >= 10.0 && numSalesPoint >= 10.0 && numRankStore <= 3.0) {
+                String itemLink = "https://right-on.co.jp/search?q=" + itemNumber;
                 Home_AController.TaskItem_A item3 = new Home_AController.TaskItem_A(rankCompany, rankBlock, rankStore,
-                        Group, itemNumber, itemName, salesPoint, stock);
+                        Group, itemNumber, itemName, salesPoint, stock, itemLink);
                 taskItems3.add(item3);
             }
         }return "redirect:/list_A";
